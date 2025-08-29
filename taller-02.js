@@ -64,3 +64,5 @@ function missingNumbers(conjunto){
   return faltantes
 }
 
+lista4 = [7, 2, 4, 6, 3, 9]
+console.log(missingNumbers(lista4))
