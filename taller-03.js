@@ -56,3 +56,23 @@ console.log(conversionRomana('III'))
 console.log(conversionRomana('XIV'))
 console.log(conversionRomana('MMXXIV'))
 console.log(conversionRomana('MXMVII'))
+
+// Punto 4
+function descomposicion(cadena) {
+    let partes = cadena.split(',')
+    let palabra = partes[0]
+    let diccionario = partes.slice(1)
+
+    for (let i = 0; i < diccionario.length; i++) {
+        for (let j = 0; j < diccionario.length; j++) {
+            if (diccionario[i] + diccionario[j] === palabra) {
+                return [diccionario[i], diccionario[j]]
+            }
+        }
+    }
+    return []
+}
+
+console.log(descomposicion("malhumor,al,hum,humor,m,mal,malhu")) // ["mal", "humor"]
+console.log(descomposicion("murcielago,mur,ciel,ago,ci,elago")) // ["mur", "cielago"]
+console.log(descomposicion("caminata,ca,mi,nata,min,ata")) // ["ca", "minata"]
