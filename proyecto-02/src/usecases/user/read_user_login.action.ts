@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import User from '../../models/user.model';
 import { ILoginResponse } from '../../types/user.types';
 
@@ -19,15 +19,23 @@ const loginUser = async (correo: string, contrasena: string): Promise<ILoginResp
 
   const userId = usuario._id.toString();
 
-  // FIX: Agregar payload correcto al jwt.sign
+
+  const jwtSecret = process.env.JWT_SECRET;
+  if (!jwtSecret) {
+    throw new Error('JWT_SECRET no está configurado');
+  }
+
+
   const token = jwt.sign(
     { id: userId },
-    process.env.JWT_SECRET as string,
-    { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+    jwtSecret,
+    {
+      expiresIn: process.env.JWT_EXPIRES_IN || '7d'
+    } as SignOptions
   );
 
-  const usuarioObj = usuario.toObject();
-  delete usuarioObj.contrasena;
+
+  const usuarioObj = usuario.toJSON();
 
   return { 
     usuario: usuarioObj as any, 
