@@ -17,13 +17,21 @@ const loginUser = async (correo: string, contrasena: string): Promise<ILoginResp
     throw new Error('Credenciales inválidas');
   }
 
+  const userId = usuario._id.toString();
+
   const token = jwt.sign(
-    { id: usuario._id },
+    { id: userId },
     process.env.JWT_SECRET as string,
-    { expiresIn: process.env.JWT_EXPIRES_IN }
+    { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
   );
 
-  return { usuario: usuario.toJSON(), token };
+  const usuarioObj = usuario.toObject();
+  delete usuarioObj.contrasena;
+
+  return { 
+    usuario: usuarioObj as any, 
+    token 
+  };
 };
 
 export default loginUser;
