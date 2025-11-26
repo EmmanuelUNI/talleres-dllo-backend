@@ -1,7 +1,7 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
-import app from '../src/app';
-import User from '../src/models/user.model';
+import app from '../app';
+import User from '../models/user.model';
 
 describe('User Controller Tests', () => {
   beforeAll(async () => {

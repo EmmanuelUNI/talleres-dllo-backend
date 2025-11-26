@@ -1,8 +1,8 @@
 import request from 'supertest';
 import mongoose from 'mongoose';
-import app from '../src/app';
-import User from '../src/models/user.model';
-import Book from '../src/models/book.model';
+import app from '../app';
+import User from '../models/user.model';
+import Book from '../models/book.model';
 
 describe('Book Controller Tests', () => {
   let tokenConPermisos: string;
