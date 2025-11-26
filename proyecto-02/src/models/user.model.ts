@@ -50,17 +50,27 @@ const userSchema = new Schema<IUserDocument>({
   timestamps: true
 });
 
+// FIX: Corregir el pre-save hook
 userSchema.pre('save', async function(next) {
   if (!this.isModified('contrasena')) {
     return next();
   }
-  const salt = await bcrypt.genSalt(10);
-  this.contrasena = await bcrypt.hash(this.contrasena, salt);
-  next();
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.contrasena = await bcrypt.hash(this.contrasena, salt);
+    next();
+  } catch (error) {
+    next(error as Error);
+  }
 });
 
+// FIX: Corregir el método de comparación
 userSchema.methods.compararContrasena = async function(contrasenaIngresada: string): Promise<boolean> {
-  return await bcrypt.compare(contrasenaIngresada, this.contrasena);
+  try {
+    return await bcrypt.compare(contrasenaIngresada, this.contrasena);
+  } catch (error) {
+    return false;
+  }
 };
 
 userSchema.methods.toJSON = function() {

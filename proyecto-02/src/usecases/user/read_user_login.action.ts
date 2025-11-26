@@ -19,6 +19,7 @@ const loginUser = async (correo: string, contrasena: string): Promise<ILoginResp
 
   const userId = usuario._id.toString();
 
+  // FIX: Agregar payload correcto al jwt.sign
   const token = jwt.sign(
     { id: userId },
     process.env.JWT_SECRET as string,
