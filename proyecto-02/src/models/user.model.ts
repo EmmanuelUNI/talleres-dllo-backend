@@ -15,7 +15,7 @@ const userSchema = new Schema<IUserDocument>({
     lowercase: true,
     trim: true
   },
-  contrasena: {
+  password: {
     type: String,
     required: true,
     minlength: 6
@@ -51,21 +51,21 @@ const userSchema = new Schema<IUserDocument>({
 });
 
 userSchema.pre('save', async function(next) {
-  if (!this.isModified('contrasena')) {
+  if (!this.isModified('password')) {
     return next();
   }
   try {
     const salt = await bcrypt.genSalt(10);
-    this.contrasena = await bcrypt.hash(this.contrasena, salt);
+    this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {
     next(error as Error);
   }
 });
 
-userSchema.methods.compararContrasena = async function(contrasenaIngresada: string): Promise<boolean> {
+userSchema.methods.compararPassword = async function(passwordIngresado: string): Promise<boolean> {
   try {
-    return await bcrypt.compare(contrasenaIngresada, this.contrasena);
+    return await bcrypt.compare(passwordIngresado, this.password);
   } catch (error) {
     return false;
   }
@@ -73,7 +73,7 @@ userSchema.methods.compararContrasena = async function(contrasenaIngresada: stri
 
 userSchema.methods.toJSON = function() {
   const obj = this.toObject();
-  delete obj.contrasena;
+  delete obj.password;
   return obj;
 };
 

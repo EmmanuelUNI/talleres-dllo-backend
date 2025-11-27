@@ -2,10 +2,10 @@ import User from '../../models/user.model';
 import { ICreateUserDTO, IUserDocument } from '../../types/user.types';
 
 const createUser = async (userData: ICreateUserDTO): Promise<IUserDocument> => {
-  const { nombre, correo, contrasena, permisos } = userData;
+  const { nombre, correo, password, permisos } = userData;
 
-  if (!nombre || !correo || !contrasena) {
-    throw new Error('Nombre, correo y contraseña son requeridos');
+  if (!nombre || !correo || !password) {
+    throw new Error('Nombre, correo y contraseña son requeridas');
   }
 
   const usuarioExistente = await User.findOne({ correo });
@@ -16,7 +16,7 @@ const createUser = async (userData: ICreateUserDTO): Promise<IUserDocument> => {
   const nuevoUsuario = new User({
     nombre,
     correo,
-    contrasena,
+    password,
     permisos: permisos || {}
   });
 

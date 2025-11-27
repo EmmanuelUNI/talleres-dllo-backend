@@ -19,7 +19,7 @@ const updateUser = async (
     throw new Error('No tienes permisos para modificar este usuario');
   }
 
-  const camposPermitidos: Array<keyof IUpdateUserDTO> = ['nombre', 'correo', 'contrasena', 'permisos'];
+  const camposPermitidos: Array<keyof IUpdateUserDTO> = ['nombre', 'correo', 'password', 'permisos'];
   const actualizaciones: Partial<IUserDocument> = {};
 
   for (const campo of camposPermitidos) {

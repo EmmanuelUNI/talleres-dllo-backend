@@ -21,8 +21,8 @@ export const register = async (req: AuthRequest, res: Response): Promise<void> =
 
 export const login = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { correo, contrasena } = req.body;
-    const { usuario, token } = await loginUser(correo, contrasena);
+    const { correo, password } = req.body;
+    const { usuario, token } = await loginUser(correo, password);
     res.status(200).json({
       mensaje: 'Login exitoso',
       usuario,

@@ -26,7 +26,7 @@ describe('Book Controller Tests', () => {
     const adminUser = {
       nombre: 'Admin',
       correo: 'admin@test.com',
-      contrasena: 'password123',
+      password: 'password123',
       permisos: {
         crearLibros: true,
         modificarLibros: true,
@@ -37,7 +37,7 @@ describe('Book Controller Tests', () => {
     const normalUser = {
       nombre: 'Usuario Normal',
       correo: 'user@test.com',
-      contrasena: 'password123'
+      password: 'password123'
     };
 
     await request(app).post('/api/users/register').send(adminUser);
@@ -45,12 +45,12 @@ describe('Book Controller Tests', () => {
 
     const adminLogin = await request(app)
       .post('/api/users/login')
-      .send({ correo: 'admin@test.com', contrasena: 'password123' });
+      .send({ correo: 'admin@test.com', password: 'password123' });
     tokenConPermisos = adminLogin.body.token;
 
     const userLogin = await request(app)
       .post('/api/users/login')
-      .send({ correo: 'user@test.com', contrasena: 'password123' });
+      .send({ correo: 'user@test.com', password: 'password123' });
     tokenSinPermisos = userLogin.body.token;
   });
 

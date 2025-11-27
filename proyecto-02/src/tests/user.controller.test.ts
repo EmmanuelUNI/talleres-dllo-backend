@@ -24,7 +24,7 @@ describe('User Controller Tests', () => {
       const nuevoUsuario = {
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       };
 
       const response = await request(app)
@@ -34,7 +34,7 @@ describe('User Controller Tests', () => {
 
       expect(response.body.mensaje).toBe('Usuario creado exitosamente');
       expect(response.body.usuario.correo).toBe('juan@test.com');
-      expect(response.body.usuario.contrasena).toBeUndefined();
+      expect(response.body.usuario.password).toBeUndefined();
     });
 
     test('Debe fallar si falta información requerida', async () => {
@@ -55,7 +55,7 @@ describe('User Controller Tests', () => {
       const usuario = {
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       };
 
       await request(app).post('/api/users/register').send(usuario);
@@ -74,14 +74,14 @@ describe('User Controller Tests', () => {
       const usuario = {
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       };
 
       await request(app).post('/api/users/register').send(usuario);
 
       const response = await request(app)
         .post('/api/users/login')
-        .send({ correo: usuario.correo, contrasena: usuario.contrasena })
+        .send({ correo: usuario.correo, password: usuario.password })
         .expect(200);
 
       expect(response.body.mensaje).toBe('Login exitoso');
@@ -91,7 +91,7 @@ describe('User Controller Tests', () => {
     test('Debe fallar con credenciales incorrectas', async () => {
       const response = await request(app)
         .post('/api/users/login')
-        .send({ correo: 'noexiste@test.com', contrasena: 'wrong' })
+        .send({ correo: 'noexiste@test.com', password: 'wrong' })
         .expect(401);
 
       expect(response.body.error).toBe('Credenciales inválidas');
@@ -103,7 +103,7 @@ describe('User Controller Tests', () => {
       const usuario = new User({
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       });
       await usuario.save();
 
@@ -130,13 +130,13 @@ describe('User Controller Tests', () => {
       const usuario = new User({
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       });
       await usuario.save();
 
       const loginResponse = await request(app)
         .post('/api/users/login')
-        .send({ correo: 'juan@test.com', contrasena: 'password123' });
+        .send({ correo: 'juan@test.com', password: 'password123' });
 
       const token = loginResponse.body.token;
 
@@ -153,7 +153,7 @@ describe('User Controller Tests', () => {
       const usuario = new User({
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       });
       await usuario.save();
 
@@ -171,13 +171,13 @@ describe('User Controller Tests', () => {
       const usuario = new User({
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       });
       await usuario.save();
 
       const loginResponse = await request(app)
         .post('/api/users/login')
-        .send({ correo: 'juan@test.com', contrasena: 'password123' });
+        .send({ correo: 'juan@test.com', password: 'password123' });
 
       const token = loginResponse.body.token;
 
@@ -194,7 +194,7 @@ describe('User Controller Tests', () => {
       const usuario = new User({
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       });
       await usuario.save();
 
@@ -211,13 +211,13 @@ describe('User Controller Tests', () => {
       const usuario = new User({
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       });
       await usuario.save();
 
       const loginResponse = await request(app)
         .post('/api/users/login')
-        .send({ correo: 'juan@test.com', contrasena: 'password123' });
+        .send({ correo: 'juan@test.com', password: 'password123' });
 
       const token = loginResponse.body.token;
 
@@ -234,7 +234,7 @@ describe('User Controller Tests', () => {
       const usuario = new User({
         nombre: 'Juan Pérez',
         correo: 'juan@test.com',
-        contrasena: 'password123'
+        password: 'password123'
       });
       await usuario.save();
 

@@ -11,13 +11,13 @@ export interface IPermisos {
 export interface IUser {
   nombre: string;
   correo: string;
-  contrasena: string;
+  password: string;
   permisos: IPermisos;
   activo: boolean;
 }
 
 export interface IUserDocument extends IUser, Document {
-  compararContrasena(contrasenaIngresada: string): Promise<boolean>;
+  compararPassword(passwordIngresado: string): Promise<boolean>;
 }
 
 export interface IUserResponse {
@@ -33,20 +33,20 @@ export interface IUserResponse {
 export interface ICreateUserDTO {
   nombre: string;
   correo: string;
-  contrasena: string;
+  password: string;
   permisos?: Partial<IPermisos>;
 }
 
 export interface IUpdateUserDTO {
   nombre?: string;
   correo?: string;
-  contrasena?: string;
+  password?: string;
   permisos?: Partial<IPermisos>;
 }
 
 export interface ILoginDTO {
   correo: string;
-  contrasena: string;
+  password: string;
 }
 
 export interface ILoginResponse {
