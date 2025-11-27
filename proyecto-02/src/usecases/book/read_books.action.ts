@@ -12,19 +12,20 @@ const readBooks = async (filtros: IBookFilters = {}, paginacion: IPaginacion = {
   }
 
   if (genero) {
-    query.genero = new RegExp(genero, 'i');
+    // Usar búsqueda insensible a mayúsculas y caracteres especiales
+    query.genero = { $regex: new RegExp(genero, 'i') };
   }
 
   if (autor) {
-    query.autor = new RegExp(autor, 'i');
+    query.autor = { $regex: new RegExp(autor, 'i') };
   }
 
   if (nombre) {
-    query.nombre = new RegExp(nombre, 'i');
+    query.nombre = { $regex: new RegExp(nombre, 'i') };
   }
 
   if (casaEditorial) {
-    query.casaEditorial = new RegExp(casaEditorial, 'i');
+    query.casaEditorial = { $regex: new RegExp(casaEditorial, 'i') };
   }
 
   if (fechaPublicacion) {

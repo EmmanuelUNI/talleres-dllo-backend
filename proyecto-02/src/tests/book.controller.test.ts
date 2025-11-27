@@ -141,9 +141,9 @@ describe('Book Controller Tests', () => {
 
     test('Debe filtrar libros por género', async () => {
       const libro1 = new Book({
-        nombre: 'Libro Ficción',
+        nombre: 'Libro Ficcion',
         autor: 'Autor 1',
-        genero: 'Ficción',
+        genero: 'Ficcion',
         fechaPublicacion: new Date('2020-01-01'),
         casaEditorial: 'Editorial 1'
       });
@@ -164,7 +164,7 @@ describe('Book Controller Tests', () => {
         .expect(200);
 
       expect(response.body.libros.length).toBe(1);
-      expect(response.body.libros[0].nombre).toBe('Libro Ficción');
+      expect(response.body.libros[0].nombre).toBe('Libro Ficcion');
     });
 
     test('Debe excluir libros inactivos por defecto', async () => {

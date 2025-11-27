@@ -11,9 +11,7 @@ module.exports = {
     '!src/tests/**/*.ts'
   ],
   transform: {
-    '^.+\\.ts$': ['ts-jest', {
-      isolatedModules: true
-    }]
+    '^.+\\.ts$': ['ts-jest', {}]
   },
   setupFiles: ['<rootDir>/src/tests/setup.ts']
 };
