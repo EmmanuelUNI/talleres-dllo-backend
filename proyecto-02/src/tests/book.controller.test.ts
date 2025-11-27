@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import app from '../app';
 import User from '../models/user.model';
 import Book from '../models/book.model';
+import Reservation from '../models/reservation.model';
 
 describe('Book Controller Tests', () => {
   let tokenConPermisos: string;
@@ -20,6 +21,7 @@ describe('Book Controller Tests', () => {
   beforeEach(async () => {
     await User.deleteMany({});
     await Book.deleteMany({});
+    await Reservation.deleteMany({});
 
     const adminUser = {
       nombre: 'Admin',
@@ -158,7 +160,7 @@ describe('Book Controller Tests', () => {
       await libro2.save();
 
       const response = await request(app)
-        .get('/api/books?genero=Ficción')
+        .get('/api/books?genero=Ficcion')
         .expect(200);
 
       expect(response.body.libros.length).toBe(1);

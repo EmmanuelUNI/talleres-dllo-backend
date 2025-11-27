@@ -10,10 +10,10 @@ module.exports = {
     '!src/**/*.d.ts',
     '!src/tests/**/*.ts'
   ],
-  globals: {
-    'ts-jest': {
+  transform: {
+    '^.+\\.ts$': ['ts-jest', {
       isolatedModules: true
-    }
+    }]
   },
   setupFiles: ['<rootDir>/src/tests/setup.ts']
 };

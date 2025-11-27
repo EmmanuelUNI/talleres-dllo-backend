@@ -10,7 +10,9 @@ dotenv.config();
 const app: Application = express();
 const PORT = process.env.PORT || 3000;
 
-connectDB();
+if (process.env.NODE_ENV !== 'test') {
+  connectDB();
+}
 
 app.use(cors());
 app.use(express.json());
@@ -28,8 +30,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ error: 'Algo salió mal en el servidor' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
-});
+// Solo iniciar el servidor si no estamos importando para tests
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Servidor corriendo en puerto ${PORT}`);
+  });
+}
 
 export default app;

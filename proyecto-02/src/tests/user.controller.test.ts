@@ -2,6 +2,7 @@ import request from 'supertest';
 import mongoose from 'mongoose';
 import app from '../app';
 import User from '../models/user.model';
+import Reservation from '../models/reservation.model';
 
 describe('User Controller Tests', () => {
   beforeAll(async () => {
@@ -15,6 +16,7 @@ describe('User Controller Tests', () => {
 
   beforeEach(async () => {
     await User.deleteMany({});
+    await Reservation.deleteMany({});
   });
 
   describe('POST /api/users/register', () => {
