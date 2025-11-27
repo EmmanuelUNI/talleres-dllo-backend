@@ -12,7 +12,6 @@ const readBooks = async (filtros: IBookFilters = {}, paginacion: IPaginacion = {
   }
 
   if (genero) {
-    // Usar búsqueda insensible a mayúsculas y caracteres especiales
     query.genero = { $regex: new RegExp(genero, 'i') };
   }
 

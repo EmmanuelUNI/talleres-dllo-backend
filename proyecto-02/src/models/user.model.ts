@@ -50,7 +50,6 @@ const userSchema = new Schema<IUserDocument>({
   timestamps: true
 });
 
-// FIX: Corregir el pre-save hook
 userSchema.pre('save', async function(next) {
   if (!this.isModified('contrasena')) {
     return next();
@@ -64,7 +63,6 @@ userSchema.pre('save', async function(next) {
   }
 });
 
-// FIX: Corregir el método de comparación
 userSchema.methods.compararContrasena = async function(contrasenaIngresada: string): Promise<boolean> {
   try {
     return await bcrypt.compare(contrasenaIngresada, this.contrasena);
