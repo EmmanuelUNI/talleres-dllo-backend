@@ -22,12 +22,12 @@ app.use('/api/users', userRoutes);
 app.use('/api/books', bookRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-  res.json({ mensaje: 'API de Biblioteca - Backend funcionando correctamente' });
+  res.json({ mensaje: 'API de Biblioteca funcionando correctamente' });
 });
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
-  res.status(500).json({ error: 'Algo salió mal en el servidor' });
+  res.status(500).json({ error: 'Error en el servidor' });
 });
 
 // Solo iniciar el servidor si no estamos importando para tests
